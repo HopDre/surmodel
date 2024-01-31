@@ -49,7 +49,7 @@ const Login = () => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Recuperacion")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Contrasenia")}>
         <Text style={styles.forget}>Olvidé mi contraseña</Text>
       </TouchableOpacity>
       <View style={styles.containerDos}>

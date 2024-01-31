@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Splash from "./views/Splash";
 import Login from "./views/Login";
 import Principal from "./views/Principal";
+import Registro from "./views/Registro";
+import Contrasenia from "./views/Contrasenia";
 
 const App = () => {
 
@@ -16,6 +18,8 @@ const App = () => {
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Principal" component={Principal} />
+      <Stack.Screen name="Registro" component={Registro} />
+      <Stack.Screen name="Contrasenia" component={Contrasenia} />
     </Stack.Navigator>
   </NavigationContainer>
   );
