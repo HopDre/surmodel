@@ -7,6 +7,7 @@ import Login from "./views/Login";
 import Principal from "./views/Principal";
 import Registro from "./views/Registro";
 import Contrasenia from "./views/Contrasenia";
+import Inicio from "./views/Inicio";
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
       <Stack.Screen name="Principal" component={Principal} />
       <Stack.Screen name="Registro" component={Registro} />
       <Stack.Screen name="Contrasenia" component={Contrasenia} />
+      <Stack.Screen name="Inicio" component={Inicio} />
     </Stack.Navigator>
   </NavigationContainer>
   );

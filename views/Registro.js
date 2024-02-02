@@ -12,8 +12,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
-import dayjs from "dayjs";
-import "dayjs/locale/es";
 import { Picker } from "@react-native-picker/picker";
 
 const MyTextInputWithIcon = ({

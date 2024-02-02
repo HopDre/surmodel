@@ -43,7 +43,7 @@ const Login = () => {
         secureTextEntry={true}
         placeholder="Ingrese su contraseña"
       />
-      <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Inicio")}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>Ingresar</Text>
         </View>
