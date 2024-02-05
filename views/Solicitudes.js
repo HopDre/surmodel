@@ -80,7 +80,7 @@ const Solicitudes = () => {
                 <Text style={styles.texts}>$50.000</Text>
               </View>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Detalles")}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
@@ -103,7 +103,7 @@ const Solicitudes = () => {
                 <Text style={styles.texts}>$50.000</Text>
               </View>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Detalles")}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
@@ -126,7 +126,7 @@ const Solicitudes = () => {
                 <Text style={styles.texts}>$50.000</Text>
               </View>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Detalles")}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
@@ -149,7 +149,7 @@ const Solicitudes = () => {
                 <Text style={styles.texts}>$50.000</Text>
               </View>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Detalles")}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
