@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
@@ -9,16 +8,33 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Picker } from "@react-native-picker/picker";
+import { Button, Text } from "react-native-elements";
 
-const Inicio = () => {
-  const navigation = useNavigation();
-  const [selectedGenre, setSelectedGenre] = useState("");
+const IconButton = ({ iconName, buttonText, onPress }) => {
+  return (
+    <Button
+      icon={
+        <Icon
+          name={iconName}
+          size={20}
+          color="white"
+          marginRight={10}
+        />
+      }
+      title={buttonText}
+      onPress={onPress}
+      buttonStyle={{ backgroundColor: "black", borderRadius:20 }}
+      
+    />
+  );
+};
 
-  const handleGenreChange = (itemValue) => {
-    setSelectedGenre(itemValue);
+const Solicitudes = () => {
+  const handleButtonPress = () => {
+    console.log("Solicitud eliminada");
   };
 
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* Menú fijo en la parte inferior con iconos presionables */}
@@ -27,13 +43,13 @@ const Inicio = () => {
           style={styles.menuItem}
           onPress={() => navigation.navigate("Inicio")}
         >
-          <Icon name="home" size={30} color="#38B6FF" />
+          <Icon name="home" size={30} color="white" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
-          onPress={() => navigation.navigate("Solicitudes")}
+          onPress={() => navigation.navigate("Principal")}
         >
-          <Icon name="paperclip" size={30} color="white" />
+          <Icon name="paperclip" size={30} color="#38B6FF" />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
@@ -50,45 +66,7 @@ const Inicio = () => {
           source={require("../assets/images/surmodel.png")}
           style={styles.icono}
         />
-        <Text style={styles.textoUno}>Tenemos estas ofertas para ti</Text>
-        <Picker
-          selectedValue={selectedGenre}
-          onValueChange={handleGenreChange}
-          style={{
-            width: "90%",
-            backgroundColor: "grey",
-            height: 10,
-            color: "white",
-            marginBottom: 20,
-          }}
-          itemStyle={{ fontSize: 10, textAlign: "center" }}
-        >
-          <Picker.Item
-            label="Seleccione Región/Ciudad"
-            value="default"
-            style={{ fontSize: 13, padding: 0, color: "black" }}
-          />
-          <Picker.Item
-            label="Temuco"
-            value="temuco"
-            style={{ fontSize: 13, padding: 0, color: "black" }}
-          />
-          <Picker.Item
-            label="Santiago"
-            value="santiago"
-            style={{ fontSize: 13, padding: 0, color: "black" }}
-          />
-          <Picker.Item
-            label="La serena"
-            value="serena"
-            style={{ fontSize: 13, padding: 0, color: "black" }}
-          />
-          <Picker.Item
-            label="Valparaiso"
-            value="Valparaiso"
-            style={{ fontSize: 13, padding: 0, color: "black" }}
-          />
-        </Picker>
+        <Text style={styles.textoUno}>Solicitudes activas</Text>
         <View style={styles.ofertas}>
           <View style={styles.cont}>
             <View style={styles.elementos}>
@@ -104,8 +82,13 @@ const Inicio = () => {
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Ver oferta</Text>
+                <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
+              <IconButton
+                iconName="trash"
+                buttonText="Elimar solicitud"
+                onPress={handleButtonPress}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.cont}>
@@ -122,8 +105,13 @@ const Inicio = () => {
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Ver oferta</Text>
+                <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
+              <IconButton
+                iconName="trash"
+                buttonText="Eliminar solicitud"
+                onPress={handleButtonPress}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.cont}>
@@ -140,8 +128,13 @@ const Inicio = () => {
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Ver oferta</Text>
+                <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
+              <IconButton
+                iconName="trash"
+                buttonText="Eliminar solicitud"
+                onPress={handleButtonPress}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.cont}>
@@ -158,8 +151,13 @@ const Inicio = () => {
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Principal")}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Ver oferta</Text>
+                <Text style={styles.buttonText}>Revisar detalles</Text>
               </View>
+              <IconButton
+                iconName="trash"
+                buttonText="Eliminar solicitud"
+                onPress={handleButtonPress}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -168,7 +166,7 @@ const Inicio = () => {
   );
 };
 
-export default Inicio;
+export default Solicitudes;
 
 const styles = StyleSheet.create({
   container: {
@@ -238,7 +236,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#DE126D",
   },
-  ofertas:{
-    marginBottom:80
-  }
+  ofertas: {
+    marginBottom: 80,
+  },
 });
