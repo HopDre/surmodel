@@ -37,7 +37,7 @@ const Inicio = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
-          onPress={() => navigation.navigate("Principal")}
+          onPress={() => navigation.navigate("Usuario")}
         >
           <Icon name="user" size={30} color="white" />
         </TouchableOpacity>
