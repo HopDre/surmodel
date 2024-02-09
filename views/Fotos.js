@@ -1,45 +1,59 @@
-import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import Constants from "expo-constants";
-import { ImagePicker } from "expo-image-multiple-picker";
-import { Button, Card } from "react-native-paper";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { useState } from 'react';
+import { View, Image, TouchableOpacity, ScrollView, StyleSheet, Button, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ImagePicker from 'react-native-image-picker';
 import { useNavigation } from "@react-navigation/native";
 
-function Fotos() {
+const Gallery = () => {
+  const [images, setImages] = useState([]);
   const navigation = useNavigation();
-  const [showImagePicker, setShowImagePicker] = useState(false);
-  const [selectedImages, setSelectedImages] = useState([]);
 
-  const closeImagePicker = (assets) => {
-    setSelectedImages([...assets]);
-    setShowImagePicker(false);
+  const handleImagePicker = () => {
+    const options = {
+      title: 'Seleccione la imagen',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('Pick de imagen cancelado');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        const source = { uri: response.uri };
+        setImages([...images, source]);
+      }
+    });
   };
 
-  const ImagePickerContainer = () => {
-    return (
-      <View style={styles.imagePickerContainer}>
-        <ImagePicker
-          onSave={(assets) => closeImagePicker(assets)}
-          onCancel={() => setShowImagePicker(false)}
-          multiple
-          limit={6}
-        />
+  const handleRemoveImage = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
+
+  const renderImages = () => {
+    return images.map((image, index) => (
+      <View key={index} style={styles.imageContainer}>
+        <TouchableOpacity onPress={() => handleImagePress(index)}>
+          <Image source={image} style={styles.image} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleRemoveImage(index)} style={styles.deleteButton}>
+          <Icon name="trash" size={20} color="red" />
+        </TouchableOpacity>
       </View>
-    );
+    ));
+  };
+
+  const handleImagePress = (index) => {
+    console.log('Imagen presionada:', index);
   };
 
   return (
-    <View style={styles.container}>
-      {showImagePicker && <ImagePickerContainer />}
-      <Button
-        style={styles.openBtn}
-        mode="contained"
-        onPress={() => setShowImagePicker((pre) => !pre)}
-      >
-        Seleccionar fotos
-      </Button>
-
+    <View style={styles.contenedor}>
       {/* Menú fijo en la parte inferior con iconos presionables */}
       <View style={styles.bottomMenu}>
         <TouchableOpacity
@@ -61,23 +75,44 @@ function Fotos() {
           <Icon name="user" size={30} color="#38B6FF" />
         </TouchableOpacity>
       </View>
-      <ScrollView>
-        {selectedImages.map((item, index) => (
-          <Card style={styles.cardContainer}>
-            <Card.Cover source={{ uri: item.uri }} />
-          </Card>
-        ))}
-      </ScrollView>
+       <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.imageContainer}>{renderImages()}</View>
+      <TouchableOpacity style={styles.button} onPress={handleImagePicker}>
+        <Text style={styles.buttonText}>Añadir imagen</Text>
+      </TouchableOpacity>
+    </ScrollView>
     </View>
+   
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 10,
+  },
+  deleteButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    borderRadius: 15,
+    padding: 5,
+  },
+  contenedor:{
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingTop: Constants.statusBarHeight,
     backgroundColor: "black",
     paddingBottom: 55,
   },
@@ -98,20 +133,17 @@ const styles = StyleSheet.create({
   menuItem: {
     alignItems: "center",
   },
-  openBtn: {
+  button:{
     width: 230,
     backgroundColor: "#DE126D",
     marginBottom: 10,
+    borderRadius:20,
   },
-  imagePickerContainer: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "white",
-    zIndex: 9,
-  },
-  cardContainer: {
-    width: 230,
-    marginTop: 20,
-  },
+  buttonText:{
+    color:"white",
+    padding:10,
+    textAlign:"center",
+  }
 });
 
-export default Fotos;
+export default Gallery;
