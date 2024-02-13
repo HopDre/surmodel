@@ -19,6 +19,8 @@ import Seguridad from "./views/Seguridad";
 import Terminos from "./views/Terminos";
 import Preguntas from "./views/Preguntas";
 import Contacto from "./views/Contacto";
+import Administracion from "./views/Administracion";
+import Listado from "./views/Listado";
 
 const App = () => {
 
@@ -44,6 +46,8 @@ const App = () => {
       <Stack.Screen name="Terminos" component={Terminos} />
       <Stack.Screen name="Preguntas" component={Preguntas} />
       <Stack.Screen name="Contacto" component={Contacto} />
+      <Stack.Screen name="Administracion" component={Administracion} />
+      <Stack.Screen name="Listado" component={Listado} />
     </Stack.Navigator>
   </NavigationContainer>
   );
