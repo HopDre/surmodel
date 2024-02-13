@@ -61,11 +61,6 @@ const Login = () => {
           <Text style={styles.crearLink}> Regístrate</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Administracion')}>
-        <View style={styles.linkContainer}>
-          <Text style={styles.crearLink}> Admin</Text>
-        </View>
-      </TouchableOpacity>
     </View>
     </View>
   );
