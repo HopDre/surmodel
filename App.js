@@ -21,6 +21,7 @@ import Preguntas from "./views/Preguntas";
 import Contacto from "./views/Contacto";
 import Administracion from "./views/Administracion";
 import Listado from "./views/Listado";
+import Curriculum from "./views/Curriculum";
 
 const App = () => {
 
@@ -48,6 +49,7 @@ const App = () => {
       <Stack.Screen name="Contacto" component={Contacto} />
       <Stack.Screen name="Administracion" component={Administracion} />
       <Stack.Screen name="Listado" component={Listado} />
+      <Stack.Screen name="Curriculum" component={Curriculum} />
     </Stack.Navigator>
   </NavigationContainer>
   );

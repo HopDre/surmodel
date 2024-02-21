@@ -1,23 +1,30 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
+  StyleSheet,
   ScrollView,
   Image,
-  Dimensions,
 } from "react-native";
+import DocumentPicker from 'react-native-document-picker';
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const Usuario = () => {
+const Curriculum = () => {
+  const [selectedDocument, setSelectedDocument] = useState(null);
   const navigation = useNavigation();
 
-  const handleButtonPress = () => {
-    console.log("Solicitud eliminada");
+  const selectDocument = async () => {
+    try {
+      const document = await DocumentPicker.getDocumentAsync({
+        type: "*/*",
+      });
+      setSelectedDocument(document);
+    } catch (err) {
+      console.error("Error al seleccionar el documento:", err);
+    }
   };
-
 
   return (
     <View style={styles.container}>
@@ -50,47 +57,23 @@ const Usuario = () => {
           source={require("../assets/images/surmodel.png")}
           style={styles.icono}
         />
-        <Text style={styles.textoUno}>Gestión de usuario</Text>
-        <View style={styles.content}>
-          <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Perfil</Text>
-              <Icon name="chevron-right" size={20} color="white" />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Curriculum")}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Mis fotos</Text>
-              <Icon name="chevron-right" size={20} color="white" />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Editar")}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Editar cuenta</Text>
-              <Icon name="chevron-right" size={20} color="white" />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Configuracion")}
-          >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Configuración general</Text>
-              <Icon name="chevron-right" size={20} color="white" />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Contacto")}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Contacto</Text>
-              <Icon name="chevron-right" size={20} color="white" />
-            </View>
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.textoUno}>
+          A modo de mejorar nuestro proceso de selección te pedimos que adjuntes
+          tu CV actualizado, así te contactaremos de manera más rápida pudiendo
+          ofrecerte las mejores oferta a tu medida
+        </Text>
+        <TouchableOpacity style={styles.button} onPress={selectDocument}>
+          <Text style={styles.buttonText}>Seleccionar documento</Text>
+        </TouchableOpacity>
+        {selectedDocument && (
+          <Text style={styles.selectedDocument}>
+            Documento seleccionado: {selectedDocument.name}
+          </Text>
+        )}
       </ScrollView>
     </View>
   );
 };
-
-export default Usuario;
 
 const styles = StyleSheet.create({
   container: {
@@ -137,9 +120,9 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     padding: 10,
     flexDirection: "row",
-    width: Dimensions.get("window").width,
     justifyContent: "space-between",
     paddingHorizontal: 20,
+    borderRadius: 20,
   },
   buttonText: {
     textAlign: "center",
@@ -150,4 +133,17 @@ const styles = StyleSheet.create({
   content: {
     marginVertical: 40,
   },
+  textoUno:{
+    marginTop:50,
+    marginBottom:50,
+    color:"white",
+    paddingHorizontal:20
+  },
+  selectedDocument: {
+    marginTop: 20,
+    fontSize: 16,
+    color:"white"
+  },
 });
+
+export default Curriculum;
